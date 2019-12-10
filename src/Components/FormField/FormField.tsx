@@ -26,6 +26,7 @@ const FormField: React.FC<FormFieldProps> = ({
         id={fieldId}
         value={value}
         placeholder={placeholder}
+        aria-label={label}
         onChange={changeEvent}
       />
     </div>
