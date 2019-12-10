@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import testingTools from "./data/testingTools";
+import List from "./Components/List/List";
+import FormField from "./Components/FormField/FormField";
+import Tabs from "./Components/Tabs/Tabs";
+import tabsData from "./data/tabsData";
 
 const App: React.FC = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const onChangeText = (newInputValue: string) => {
+    setInputValue(newInputValue);
+    return true;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <List items={testingTools} />
+      <FormField
+        value={inputValue}
+        placeholder={"First Name"}
+        label={"First Name: "}
+        onChangeText={onChangeText}
+        fieldId={"first-name"}
+      />
+      <Tabs>
+        {Object.keys(tabsData).map((tab, tabIndex) => {
+          return (
+            <div id={tab} key={tabIndex}>
+              {/*
+//@ts-ignore */}
+              {tabsData[tab]}
+            </div>
+          );
+        })}
+      </Tabs>
     </div>
   );
-}
+};
 
 export default App;
